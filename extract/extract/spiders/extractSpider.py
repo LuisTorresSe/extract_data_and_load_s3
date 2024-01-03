@@ -21,7 +21,8 @@ class ExtractSpider(scrapy.Spider):
         
       
         list_object = self.getListObjectBucketDir(self.bucket_name, self.access_key, self.secret_key)
-        print(list_object)
+        if list_object is None :
+            print('No tengo nada')
         for link in response.css(".resource-list li:not(.first) .links "):
             name = extract_name(link.css(".data-link::attr(href)").get())
             links = link.css(".data-link::attr(href)").get()
@@ -38,6 +39,6 @@ class ExtractSpider(scrapy.Spider):
         
         if 'Contents' in response :
             objects = response['Contents']
-        for object in objects:
-            listObjects.append(object['Key'].split('/')[1])
+            for object in objects:
+                listObjects.append(object['Key'].split('/')[1])
         return listObjects
