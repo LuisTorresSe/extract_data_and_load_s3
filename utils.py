@@ -1,3 +1,0 @@
-def transformDataUTF_8():
-
-    
